@@ -1,0 +1,48 @@
+server:
+  port: 8090
+
+logging:
+  file:
+    max-history=30
+
+spring:
+  h2:
+    console:
+      enabled:true
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/multi-module-demo-local?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=IST&useLegacyDatetimeCode=false
+    username: root
+    password: multi-module-demo-local
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 67321637263-hsdgasd6dgsahds66tutbn.apps.googleusercontent.com
+            clientSecret: asdshdsgdhs56736
+            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - email
+              - profile
+app:
+  auth:
+    tokenSecret: A135B26B903530MD68429EM753LC2KDCBB
+    tokenExpirationMsec: 86400000
+  oauth2:
+    # After successfully authenticating with the OAuth2 Provider,
+    # we'll be generating an auth token for the user and sending the token to the
+    # redirectUri mentioned by the frontend client in the /oauth2/authorize request.
+    # We're not using cookies because they won't work well in mobile clients.
+    authorizedRedirectUris:
+      - http://localhost:3000/login/redirect

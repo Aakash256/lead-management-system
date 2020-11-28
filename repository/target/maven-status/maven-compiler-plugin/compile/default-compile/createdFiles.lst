@@ -1,0 +1,6 @@
+com\business\manager\repository\entity\Error.class
+com\business\manager\repository\entity\User.class
+com\business\manager\repository\entity\ApplicationProperty.class
+com\business\manager\repository\UserRepository.class
+com\business\manager\repository\ApplicationPropertyRepository.class
+com\business\manager\repository\ErrorRepository.class
