@@ -42,7 +42,7 @@
       <plugin>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
-          <mainClass>com.business.manager.service.ManagementServiceApplication</mainClass>
+          <mainClass>com.business.manager.service.ServiceApplication</mainClass>
         </configuration>
         <executions>
           <execution>

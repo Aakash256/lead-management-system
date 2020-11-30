@@ -13,13 +13,13 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication(scanBasePackages = "com.business.manager.*")
 @ComponentScan(basePackages = {"com.business.manager.*"})
 @EntityScan(basePackages = {"com.business.manager.*"})
-@EnableJpaRepositories(basePackages = {"com.business.manager.*"})
+@EnableJpaRepositories(basePackages = {"com.business.manager.repository.*"})
 @EnableConfigurationProperties(AppProperties.class)
-public class ManagementServiceApplication {
+public class ServiceApplication {
 
   public static void main(String[] args) {
     try {
-      SpringApplication.run(ManagementServiceApplication.class, args);
+      SpringApplication.run(ServiceApplication.class, args);
     } catch (Exception e) {
       e.printStackTrace();
       log.error("Exception while launching the instance", e);
