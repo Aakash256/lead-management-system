@@ -1,4 +1,7 @@
+/Users/netflix/Desktop/lms/backend/lead-management-system/repository/src/main/java/com/business/manager/repository/entity/LoginRequest.java
 /Users/netflix/Desktop/lms/backend/lead-management-system/repository/src/main/java/com/business/manager/repository/ApplicationPropertyRepository.java
+/Users/netflix/Desktop/lms/backend/lead-management-system/repository/src/main/java/com/business/manager/repository/entity/AuthResponse.java
+/Users/netflix/Desktop/lms/backend/lead-management-system/repository/src/main/java/com/business/manager/repository/entity/SignUpRequest.java
 /Users/netflix/Desktop/lms/backend/lead-management-system/repository/src/main/java/com/business/manager/repository/ErrorRepository.java
 /Users/netflix/Desktop/lms/backend/lead-management-system/repository/src/main/java/com/business/manager/repository/entity/Error.java
 /Users/netflix/Desktop/lms/backend/lead-management-system/repository/src/main/java/com/business/manager/repository/entity/ApplicationProperty.java

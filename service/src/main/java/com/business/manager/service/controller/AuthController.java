@@ -2,6 +2,7 @@ package com.business.manager.service.controller;
 
 import com.business.manager.common.exception.BadRequestException;
 import com.business.manager.repository.UserRepository;
+import com.business.manager.repository.entity.AuthResponse;
 import com.business.manager.repository.entity.User;
 import com.business.manager.repository.entity.LoginRequest;
 import com.business.manager.repository.entity.SignUpRequest;
@@ -40,21 +41,21 @@ public class AuthController {
     @Autowired
     private TokenProvider tokenProvider;
 
-//    @PostMapping("/login")
-//    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-//
-//        Authentication authentication = authenticationManager.authenticate(
-//                new UsernamePasswordAuthenticationToken(
-//                        loginRequest.getEmail(),
-//                        loginRequest.getPassword()
-//                )
-//        );
-//
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
-//
-//        String token = tokenProvider.createToken(authentication);
-//        return ResponseEntity.ok(new AuthResponse(token));
-//    }
+    @PostMapping("/login")
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginRequest.getEmail(),
+                        loginRequest.getPassword()
+                )
+        );
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String token = tokenProvider.createToken(authentication);
+        return ResponseEntity.ok(new AuthResponse(token));
+    }
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
