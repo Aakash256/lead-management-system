@@ -22,70 +22,127 @@ public class User {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @Column
+  private Integer status;
+
+  @Column
+  private String first_name;
+
+  @Column
+  private String last_name;
+
+  @Column
+  private String job_title;
+
   @Column(nullable = false)
   private String email;
   @Column
   private String password;
-  @Column
-  private String auth_provider;
-  @Column(nullable = false)
-  private String roles;
-  @Column(nullable = false)
-  @ColumnDefault("true")
-  private Boolean enabled;
-  @Column(nullable = false)
-  private String name;
-  @Column
-  private String mobile_no;
-  @Column
-  private String dob;
-  @Column(nullable = false)
-  @ColumnDefault("false")
-  private Boolean email_verified;
-  @Column(nullable = false)
-  @ColumnDefault("false")
-  private Boolean mobile_verified;
-  @Column
-  private String imageUrl;
 
-  @Column(nullable = false)
-  private Date update_date;
-  @Column(nullable = false)
-  private String update_by;
-  @Column(nullable = false)
-  private Date insert_date;
-  @Column(nullable = false)
+  @Column
+  private String address;
+
+  @Column
+  private String city;
+
+  @Column
+  private String state;
+
+  @Column
+  private String postal_code;
+
+  @Column
+  private String country;
+
+  @Column
+  private String department;
+
+  @Column
+  private String work_phone;
+
+  @Column
+  private String work_mobile;
+
+  @Column
+  private String home_phone;
+
+  @Column
+  private String home_mobile;
+
+  @Column
   private String insert_by;
+
+  @Column
+  private Date insert_date;
+
+  @Column
+  private String update_by;
+
+  @Column
+  private Date update_date;
 
   public User() {
   }
 
-  public User(Long id, String email, String name, String mobile_no, String imageUrl,
-      String dob) {
+  public User(Long id, Integer status, String first_name, String last_name, String job_title, String email,
+              String password, String address, String city, String state, String postal_code, String country,
+              String department, String work_phone, String work_mobile, String home_phone, String home_mobile) {
     this.id = id;
-    this.email = email;
-    this.name = name;
-    this.mobile_no = mobile_no;
-    this.imageUrl = imageUrl;
-    this.dob = dob;
-  }
-
-  public User(String email, String password,
-      String auth_provider, String roles, Boolean enabled, String name,
-      String mobile_no, String dob, Boolean email_verified, Boolean mobile_verified,
-      String imageUrl) {
+    this.status = status;
+    this.first_name = first_name;
+    this.last_name = last_name;
+    this.job_title = job_title;
     this.email = email;
     this.password = password;
-    this.auth_provider = auth_provider;
-    this.roles = roles;
-    this.enabled = enabled;
-    this.name = name;
-    this.mobile_no = mobile_no;
-    this.dob = dob;
-    this.email_verified = email_verified;
-    this.mobile_verified = mobile_verified;
-    this.imageUrl = imageUrl;
+    this.address = address;
+    this.city = city;
+    this.state = state;
+    this.postal_code = postal_code;
+    this.country = country;
+    this.department = department;
+    this.work_phone = work_phone;
+    this.work_mobile = work_mobile;
+    this.home_phone = home_phone;
+    this.home_mobile = home_mobile;
   }
+
+  public User(Integer status, String first_name, String last_name, String job_title, String email,
+              String password, String address, String city, String state, String postal_code, String country,
+              String department, String work_phone, String work_mobile, String home_phone, String home_mobile) {
+    this.status = status;
+    this.first_name = first_name;
+    this.last_name = last_name;
+    this.job_title = job_title;
+    this.email = email;
+    this.password = password;
+    this.address = address;
+    this.city = city;
+    this.state = state;
+    this.postal_code = postal_code;
+    this.country = country;
+    this.department = department;
+    this.work_phone = work_phone;
+    this.work_mobile = work_mobile;
+    this.home_phone = home_phone;
+    this.home_mobile = home_mobile;
+  }
+
+//  public User(String email, String password,
+//      String auth_provider, String roles, Boolean enabled, String name,
+//      String mobile_no, String dob, Boolean email_verified, Boolean mobile_verified,
+//      String imageUrl) {
+//    this.email = email;
+//    this.password = password;
+//    this.auth_provider = auth_provider;
+//    this.roles = roles;
+//    this.enabled = enabled;
+//    this.name = name;
+//    this.mobile_no = mobile_no;
+//    this.dob = dob;
+//    this.email_verified = email_verified;
+//    this.mobile_verified = mobile_verified;
+//    this.imageUrl = imageUrl;
+//  }
 
   @PrePersist
   protected void onCreate() {
@@ -123,75 +180,131 @@ public class User {
     this.password = password;
   }
 
-  public String getAuth_provider() {
-    return auth_provider;
-  }
+  public String getAddress() { return address;}
 
-  public void setAuth_provider(String auth_provider) {
-    this.auth_provider = auth_provider;
-  }
+  public void setAddress(String address) { this.address = address;}
 
-  public String getRoles() {
-    return roles;
-  }
+  public String getFirst_name() { return first_name;}
 
-  public void setRoles(String roles) {
-    this.roles = roles;
-  }
+  public void setFirst_name(String first_name) { this.first_name = first_name;}
 
-  public Boolean getEnabled() {
-    return enabled;
-  }
+  public String getLast_name() { return last_name;}
 
-  public void setEnabled(Boolean enabled) {
-    this.enabled = enabled;
-  }
+  public void setLast_name(String last_name) { this.last_name = last_name;}
 
-  public String getName() {
-    return name;
-  }
+  public Integer getStatus() { return status;}
 
-  public void setName(String name) {
-    this.name = name;
-  }
+  public void setStatus(Integer status) { this.status = status;}
 
-  public String getMobile_no() {
-    return mobile_no;
-  }
+  public String getCity() { return city;}
 
-  public void setMobile_no(String mobile_no) {
-    this.mobile_no = mobile_no;
-  }
+  public void setCity(String city) { this.city = city;}
 
-  public String getDob() {
-    return dob;
-  }
+  public String getState() { return state;}
 
-  public void setDob(String dob) {
-    this.dob = dob;
-  }
+  public void setState(String state) { this.state = state;}
 
-  public Boolean getEmail_verified() {
-    return email_verified;
-  }
+  public String getPostal_code() { return postal_code;}
 
-  public void setEmail_verified(Boolean email_verified) {
-    this.email_verified = email_verified;
-  }
+  public void setPostal_code(String postal_code) { this.postal_code = postal_code;}
 
-  public Boolean getMobile_verified() {
-    return mobile_verified;
-  }
+  public String getCountry() { return country;}
 
-  public void setMobile_verified(Boolean mobile_verified) {
-    this.mobile_verified = mobile_verified;
-  }
+  public void setCountry(String country) { this.country = country;}
 
-  public String getImageUrl() {
-    return imageUrl;
-  }
+  public String getDepartment() { return department;}
 
-  public void setImageUrl(String imageUrl) {
-    this.imageUrl = imageUrl;
-  }
+  public void setDepartment(String department) { this.department = department;}
+
+  public String getWork_phone() { return work_phone;}
+
+  public void setWork_phone(String work_phone) { this.work_phone = work_phone;}
+
+  public String getWork_mobile() { return work_mobile;}
+
+  public void setWork_mobile(String work_mobile) { this.work_mobile = work_mobile;}
+
+  public String getHome_phone() { return home_phone;}
+
+  public void setHome_phone(String home_phone) { this.home_phone = home_phone;}
+
+  public String getHome_mobile() { return home_mobile;}
+
+  public void setHome_mobile(String home_mobile) { this.home_mobile = home_mobile;}
+
+  public String getJob_title() { return job_title;}
+
+  public void setJob_title(String job_title) { this.job_title = job_title;}
+
+//  public String getAuth_provider() {
+//    return auth_provider;
+//  }
+//
+//  public void setAuth_provider(String auth_provider) {
+//    this.auth_provider = auth_provider;
+//  }
+
+//  public String getRoles() {
+//    return roles;
+//  }
+//
+//  public void setRoles(String roles) {
+//    this.roles = roles;
+//  }
+
+//  public Boolean getEnabled() {
+//    return enabled;
+//  }
+//
+//  public void setEnabled(Boolean enabled) {
+//    this.enabled = enabled;
+//  }
+//
+//  public String getName() {
+//    return name;
+//  }
+//
+//  public void setName(String name) {
+//    this.name = name;
+//  }
+//
+//  public String getMobile_no() {
+//    return mobile_no;
+//  }
+//
+//  public void setMobile_no(String mobile_no) {
+//    this.mobile_no = mobile_no;
+//  }
+//
+//  public String getDob() {
+//    return dob;
+//  }
+//
+//  public void setDob(String dob) {
+//    this.dob = dob;
+//  }
+//
+//  public Boolean getEmail_verified() {
+//    return email_verified;
+//  }
+//
+//  public void setEmail_verified(Boolean email_verified) {
+//    this.email_verified = email_verified;
+//  }
+//
+//  public Boolean getMobile_verified() {
+//    return mobile_verified;
+//  }
+//
+//  public void setMobile_verified(Boolean mobile_verified) {
+//    this.mobile_verified = mobile_verified;
+//  }
+//
+//  public String getImageUrl() {
+//    return imageUrl;
+//  }
+//
+//  public void setImageUrl(String imageUrl) {
+//    this.imageUrl = imageUrl;
+//  }
 }

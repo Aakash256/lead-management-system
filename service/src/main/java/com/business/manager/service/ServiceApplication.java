@@ -10,10 +10,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Slf4j
-@SpringBootApplication(scanBasePackages = "com.business.manager.*")
-@ComponentScan(basePackages = {"com.business.manager.*"})
-@EntityScan(basePackages = {"com.business.manager.*"})
-@EnableJpaRepositories(basePackages = {"com.business.manager.repository.*"})
+@SpringBootApplication(scanBasePackages = {"com.business.manager.*", "com.business.manager.repository.*"})
+@ComponentScan(basePackages = {"com.business.manager.*", "com.business.manager.repository.*"})
+@EntityScan(basePackages = {"com.business.manager.*", "com.business.manager.repository.*"})
+@EnableJpaRepositories(basePackages = {"com.business.manager.*", "com.business.manager.repository.*"})
 @EnableConfigurationProperties(AppProperties.class)
 public class ServiceApplication {
 

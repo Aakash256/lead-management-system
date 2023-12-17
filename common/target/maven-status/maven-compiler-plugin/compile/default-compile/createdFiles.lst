@@ -1,7 +1,7 @@
-com\business\manager\common\exception\ResourceNotFoundException.class
-com\business\manager\common\dto\ErrorDTO.class
-com\business\manager\common\dto\UserDTO.class
-com\business\manager\common\constant\AuthProviderEnum.class
-com\business\manager\common\constant\AuthRoleEnum.class
-com\business\manager\common\constant\ApplicationPropertyEnum.class
-com\business\manager\common\exception\BadRequestException.class
+com/business/manager/common/exception/BadRequestException.class
+com/business/manager/common/constant/AuthProviderEnum.class
+com/business/manager/common/constant/AuthRoleEnum.class
+com/business/manager/common/dto/ErrorDTO.class
+com/business/manager/common/dto/UserDTO.class
+com/business/manager/common/constant/ApplicationPropertyEnum.class
+com/business/manager/common/exception/ResourceNotFoundException.class

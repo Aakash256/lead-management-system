@@ -57,8 +57,10 @@ public class CustomUserDetailsService implements UserDetailsService {
   }
 
   private UserDTO createUserDTO(User user) {
-    return new UserDTO(user.getId(), user.getEmail(), user.getName(), user.getMobile_no(),
-        user.getImageUrl(), user.getDob());
+//    return new UserDTO(user.getId(), user.getEmail(), user.getName(), user.getMobile_no(),
+//        user.getImageUrl(), user.getDob());
+
+    return new UserDTO(user.getId(), user.getEmail(), user.getFirst_name(), user.getLast_name(), user.getWork_mobile());
   }
 
   public String updateUser(UserDTO userDTO) {
@@ -66,10 +68,9 @@ public class CustomUserDetailsService implements UserDetailsService {
     User user = null;
     if (userOptional.isPresent()) {
       user = userOptional.get();
-      user.setName(userDTO.getName());
-      user.setMobile_no(userDTO.getMobileNo());
-      user.setImageUrl(userDTO.getImageURL());
-      user.setDob(userDTO.getDob());
+      user.setFirst_name(userDTO.getFirst_name());
+      user.setLast_name(userDTO.getLast_name());
+      user.setWork_mobile(userDTO.getWork_mobile());
     }else{
       throw new BadRequestException("User with id - "+userDTO.getId()+" does not exist");
     }
@@ -81,7 +82,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     User user = securityUtil.getAuthenticatedUser();
     UserDTO userDTO = null;
     if(null != user) {
-      userDTO = new UserDTO(user.getId(), user.getEmail(), user.getName(), user.getMobile_no(), user.getImageUrl(), user.getDob());
+      userDTO = new UserDTO(user.getId(), user.getEmail(), user.getFirst_name(), user.getLast_name(), user.getWork_mobile());
     }else{
       throw new OAuth2AuthenticationProcessingException("Invalid Token !! Please login again");
     }

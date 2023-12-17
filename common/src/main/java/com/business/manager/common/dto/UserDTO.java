@@ -3,22 +3,20 @@ package com.business.manager.common.dto;
 public class UserDTO {
   private Long id;
   private String email;
-  private String name;
-  private String mobileNo;
-  private String imageURL;
-  private String dob;
+  private String first_name;
+
+  private String last_name;
+  private String work_mobile;
 
   public UserDTO() {
   }
 
-  public UserDTO(Long id, String email, String name, String mobileNo, String imageURL,
-      String dob) {
+  public UserDTO(Long id, String email, String first_name, String last_name, String work_mobile) {
     this.id = id;
     this.email = email;
-    this.name = name;
-    this.mobileNo = mobileNo;
-    this.imageURL = imageURL;
-    this.dob = dob;
+    this.first_name = first_name;
+    this.last_name = last_name;
+    this.work_mobile = work_mobile;
   }
 
   public Long getId() {
@@ -37,35 +35,27 @@ public class UserDTO {
     this.email = email;
   }
 
-  public String getName() {
-    return name;
+  public String getFirst_name() {
+    return first_name;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setFirst_name(String first_name) {
+    this.first_name = first_name;
   }
 
-  public String getMobileNo() {
-    return mobileNo;
+  public String getLast_name() {
+    return last_name;
   }
 
-  public void setMobileNo(String mobileNo) {
-    this.mobileNo = mobileNo;
+  public void setLast_name(String last_name) {
+    this.last_name = last_name;
   }
 
-  public String getImageURL() {
-    return imageURL;
+  public String getWork_mobile() {
+    return work_mobile;
   }
 
-  public void setImageURL(String imageURL) {
-    this.imageURL = imageURL;
-  }
-
-  public String getDob() {
-    return dob;
-  }
-
-  public void setDob(String dob) {
-    this.dob = dob;
+  public void setWork_mobile(String work_mobile) {
+    this.work_mobile = work_mobile;
   }
 }
