@@ -60,7 +60,25 @@ public class CustomUserDetailsService implements UserDetailsService {
 //    return new UserDTO(user.getId(), user.getEmail(), user.getName(), user.getMobile_no(),
 //        user.getImageUrl(), user.getDob());
 
-    return new UserDTO(user.getId(), user.getEmail(), user.getFirst_name(), user.getLast_name(), user.getWork_mobile());
+    return new UserDTO(
+            user.getId(),
+            user.getStatus(),
+            user.getFirst_name(),
+            user.getLast_name(),
+            user.getJob_title(),
+            user.getEmail(),
+            user.getPassword(),
+            user.getAddress(),
+            user.getCity(),
+            user.getState(),
+            user.getPostal_code(),
+            user.getCountry(),
+            user.getDepartment(),
+            user.getWork_phone(),
+            user.getWork_mobile(),
+            user.getHome_phone(),
+            user.getHome_mobile()
+    );
   }
 
   public String updateUser(UserDTO userDTO) {
@@ -82,7 +100,23 @@ public class CustomUserDetailsService implements UserDetailsService {
     User user = securityUtil.getAuthenticatedUser();
     UserDTO userDTO = null;
     if(null != user) {
-      userDTO = new UserDTO(user.getId(), user.getEmail(), user.getFirst_name(), user.getLast_name(), user.getWork_mobile());
+      userDTO = new UserDTO( user.getId(),
+              user.getStatus(),
+              user.getFirst_name(),
+              user.getLast_name(),
+              user.getJob_title(),
+              user.getEmail(),
+              user.getPassword(),
+              user.getAddress(),
+              user.getCity(),
+              user.getState(),
+              user.getPostal_code(),
+              user.getCountry(),
+              user.getDepartment(),
+              user.getWork_phone(),
+              user.getWork_mobile(),
+              user.getHome_phone(),
+              user.getHome_mobile());
     }else{
       throw new OAuth2AuthenticationProcessingException("Invalid Token !! Please login again");
     }
