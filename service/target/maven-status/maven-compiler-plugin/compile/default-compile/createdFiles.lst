@@ -7,5 +7,6 @@ com/business/manager/service/context/ApplicationPropertyContext.class
 com/business/manager/service/config/AppConfig.class
 com/business/manager/service/config/WebMvcConfig.class
 com/business/manager/service/RestResponseEntityExceptionHandler.class
+com/business/manager/service/controller/OrganizationController.class
 com/business/manager/service/ServiceApplication.class
 com/business/manager/service/SchedulerInitializer.class

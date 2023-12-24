@@ -13,5 +13,6 @@
 /Users/netflix/Desktop/lms/backend/lead-management-system/security/src/main/java/com/business/manager/security/util/CookieUtils.java
 /Users/netflix/Desktop/lms/backend/lead-management-system/security/src/main/java/com/business/manager/security/security/oauth2/HttpCookieOAuth2AuthorizationRequestRepository.java
 /Users/netflix/Desktop/lms/backend/lead-management-system/security/src/main/java/com/business/manager/security/security/oauth2/OAuth2AuthenticationSuccessHandler.java
+/Users/netflix/Desktop/lms/backend/lead-management-system/security/src/main/java/com/business/manager/security/security/CustomOrganizationDetailsService.java
 /Users/netflix/Desktop/lms/backend/lead-management-system/security/src/main/java/com/business/manager/security/config/SecurityConfig.java
 /Users/netflix/Desktop/lms/backend/lead-management-system/security/src/main/java/com/business/manager/security/exception/OAuth2AuthenticationProcessingException.java

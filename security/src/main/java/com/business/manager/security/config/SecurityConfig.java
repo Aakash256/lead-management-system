@@ -1,5 +1,6 @@
 package com.business.manager.security.config;
 
+import com.business.manager.security.security.CustomOrganizationDetailsService;
 import com.business.manager.security.security.CustomUserDetailsService;
 import com.business.manager.security.security.TokenAuthenticationFilter;
 import com.business.manager.security.security.oauth2.CustomOAuth2UserService;
@@ -37,6 +38,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   private CustomUserDetailsService customUserDetailsService;
 
   @Autowired
+  private CustomOrganizationDetailsService customOrganizationDetailsService;
+
+  @Autowired
   private CustomOAuth2UserService customOAuth2UserService;
 
   @Autowired
@@ -68,8 +72,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
       throws Exception {
     authenticationManagerBuilder
         .userDetailsService(customUserDetailsService)
-        .passwordEncoder(passwordEncoder());
+        .passwordEncoder(passwordEncoder())
+            .and().userDetailsService(customOrganizationDetailsService).passwordEncoder(passwordEncoder());
   }
+
+//  @Bean
+//  public CustomOrganizationDetailsService customOrganizationDetailsService() {
+//    return new CustomOrganizationDetailsService();
+//  }
 
   @Bean
   public PasswordEncoder passwordEncoder() {
@@ -113,7 +123,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/**/meta-data/lab-types", "/**/meta-data/lab-pricing", "/**/contact",
             "/**/public/labs", "/**/trainings/{training-uuid}", "/**/trainings/{training-uuid}/labs","/**/payment/**").permitAll()
         .antMatchers("/",
-            "/error",
+            "/error", "/organization/**",
             "/favicon.ico",
             "/**/*.png",
             "/**/*.gif",

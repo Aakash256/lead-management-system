@@ -2,6 +2,7 @@
 /Users/netflix/Desktop/lms/backend/lead-management-system/common/src/main/java/com/business/manager/common/dto/ErrorDTO.java
 /Users/netflix/Desktop/lms/backend/lead-management-system/common/src/main/java/com/business/manager/common/constant/AuthProviderEnum.java
 /Users/netflix/Desktop/lms/backend/lead-management-system/common/src/main/java/com/business/manager/common/constant/ApplicationPropertyEnum.java
+/Users/netflix/Desktop/lms/backend/lead-management-system/common/src/main/java/com/business/manager/common/dto/OrganizationDTO.java
 /Users/netflix/Desktop/lms/backend/lead-management-system/common/src/main/java/com/business/manager/common/exception/BadRequestException.java
 /Users/netflix/Desktop/lms/backend/lead-management-system/common/src/main/java/com/business/manager/common/dto/UserDTO.java
 /Users/netflix/Desktop/lms/backend/lead-management-system/common/src/main/java/com/business/manager/common/exception/ResourceNotFoundException.java

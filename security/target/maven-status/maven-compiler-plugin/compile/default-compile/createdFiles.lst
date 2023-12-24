@@ -9,6 +9,7 @@ com/business/manager/security/security/oauth2/HttpCookieOAuth2AuthorizationReque
 com/business/manager/security/util/SecurityUtil.class
 com/business/manager/security/util/CookieUtils.class
 com/business/manager/security/security/oauth2/OAuth2AuthenticationFailureHandler.class
+com/business/manager/security/security/CustomOrganizationDetailsService.class
 com/business/manager/security/security/TokenAuthenticationFilter.class
 com/business/manager/security/exception/OAuth2AuthenticationProcessingException.class
 com/business/manager/security/config/AppProperties$OAuth2.class

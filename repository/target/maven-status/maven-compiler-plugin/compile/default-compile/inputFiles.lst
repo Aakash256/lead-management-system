@@ -5,5 +5,7 @@
 /Users/netflix/Desktop/lms/backend/lead-management-system/repository/src/main/java/com/business/manager/repository/ErrorRepository.java
 /Users/netflix/Desktop/lms/backend/lead-management-system/repository/src/main/java/com/business/manager/repository/entity/Error.java
 /Users/netflix/Desktop/lms/backend/lead-management-system/repository/src/main/java/com/business/manager/repository/entity/ApplicationProperty.java
+/Users/netflix/Desktop/lms/backend/lead-management-system/repository/src/main/java/com/business/manager/repository/OrganizationRepository.java
 /Users/netflix/Desktop/lms/backend/lead-management-system/repository/src/main/java/com/business/manager/repository/entity/User.java
 /Users/netflix/Desktop/lms/backend/lead-management-system/repository/src/main/java/com/business/manager/repository/UserRepository.java
+/Users/netflix/Desktop/lms/backend/lead-management-system/repository/src/main/java/com/business/manager/repository/entity/Organization.java
