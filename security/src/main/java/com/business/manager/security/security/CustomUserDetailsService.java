@@ -81,6 +81,12 @@ public class CustomUserDetailsService implements UserDetailsService {
       user.setFirst_name(userDTO.getFirst_name());
       user.setLast_name(userDTO.getLast_name());
       user.setMobile_no(userDTO.getMobile_no());
+      if(userDTO.getReportsTo() != null) {
+        Optional<User> reportsToUser = userRepository.findById(userDTO.getReportsTo());
+          if (reportsToUser.isPresent()) {
+            user.setReportsTo(reportsToUser.get());
+          }
+      }
     }else{
       throw new BadRequestException("User with id - "+userDTO.getId()+" does not exist");
     }

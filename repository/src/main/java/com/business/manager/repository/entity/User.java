@@ -37,6 +37,10 @@ public class User {
 
   @Column
   private boolean email_verified;
+
+  @ManyToOne
+  @JoinColumn(name = "reports_to", nullable = true)
+  private User reportsTo;
   @ManyToOne
   @JoinColumn(name = "org_id", nullable = true)
   private Organization organization;
@@ -57,7 +61,7 @@ public class User {
   }
 
   public User(Long id, String status, String first_name, String last_name, String email, String password,
-              String mobile_no, Boolean mobile_verified, Boolean email_verified, Organization organization) {
+              String mobile_no, Boolean mobile_verified, Boolean email_verified, User user, Organization organization) {
     this.id = id;
     this.status = status;
     this.first_name = first_name;
@@ -67,11 +71,12 @@ public class User {
     this.mobile_no = mobile_no;
     this.mobile_verified = mobile_verified;
     this.email_verified = email_verified;
+    this.reportsTo = user;
     this.organization = organization;
   }
 
   public User(String status, String first_name, String last_name, String email, String password,String mobile_no,
-              Boolean mobile_verified, Boolean email_verified, Organization organization) {
+              Boolean mobile_verified, Boolean email_verified, User user, Organization organization) {
     this.status = status;
     this.first_name = first_name;
     this.last_name = last_name;
@@ -80,6 +85,7 @@ public class User {
     this.mobile_no = mobile_no;
     this.mobile_verified = mobile_verified;
     this.email_verified = email_verified;
+    this.reportsTo = user;
     this.organization = organization;
   }
 
@@ -159,6 +165,14 @@ public class User {
   public Boolean getEmail_Verified() { return email_verified;}
 
   public void setEmail_verified(Boolean email_verified) { this.email_verified = email_verified;}
+
+  public User getReportsTo() {
+    return reportsTo;
+  }
+
+  public void setReportsTo(User reportsTo) {
+    this.reportsTo = reportsTo;
+  }
 
   public Organization getOrganization() {
     return organization;

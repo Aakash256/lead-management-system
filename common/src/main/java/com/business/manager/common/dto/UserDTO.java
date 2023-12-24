@@ -16,6 +16,8 @@ public class UserDTO {
 
   private Boolean email_verified;
 
+  private Long reportsTo;
+
   public UserDTO() {
   }
 
@@ -30,6 +32,21 @@ public class UserDTO {
     this.mobile_no = mobile_no;
     this.mobile_verified = mobile_verified;
     this.email_verified = email_verified;
+  }
+
+  public UserDTO(Long id, String status, String first_name, String last_name,
+                 String email, String password, String mobile_no, Boolean mobile_verified, Boolean email_verified,
+                 Long reportsTo) {
+    this.id = id;
+    this.status = status;
+    this.first_name = first_name;
+    this.last_name = last_name;
+    this.email = email;
+    this.password = password;
+    this.mobile_no = mobile_no;
+    this.mobile_verified = mobile_verified;
+    this.email_verified = email_verified;
+    this.reportsTo = reportsTo;
   }
 
   public Long getId() {
@@ -91,6 +108,8 @@ public class UserDTO {
 
   public void setEmail_verified(Boolean email_verified) { this.email_verified = email_verified;}
 
+  public Long getReportsTo() { return reportsTo;}
 
+  public void setReportsTo(Long reportsTo) { this.reportsTo = reportsTo;}
 
 }
