@@ -2,9 +2,11 @@ package com.business.manager.security.security;
 
 import com.business.manager.common.dto.OrganizationDTO;
 import com.business.manager.common.exception.BadRequestException;
+import com.business.manager.repository.UserRepository;
 import com.business.manager.repository.entity.Organization;
 import com.business.manager.common.exception.ResourceNotFoundException;
 import com.business.manager.repository.OrganizationRepository;
+import com.business.manager.repository.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,6 +27,9 @@ public class CustomOrganizationDetailsService implements UserDetailsService {
 
     @Autowired
     OrganizationRepository organizationRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     @Transactional
     public Organization loadOrgById(Long id) {
@@ -80,6 +85,16 @@ public class CustomOrganizationDetailsService implements UserDetailsService {
         organization.setRec_version(organizationDTO.getRec_version());
 
         organizationRepository.save(organization);
+
+        Optional<User> userOptional = userRepository.findById(organizationDTO.getUserId());
+        if(userOptional.isPresent()) {
+            User user = userOptional.get();
+            user.setOrganization(organization);
+            userRepository.save(user);
+        } else {
+            return "User is not present in the database";
+        }
+
         return "Organization has been created successfully";
     }
 

@@ -17,7 +17,6 @@ public class OrganizationController {
     @Autowired
     private CustomOrganizationDetailsService customOrganizationDetailsService;
 
-
     @GetMapping(path = "/{org-id}")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", value = "Authorization token",

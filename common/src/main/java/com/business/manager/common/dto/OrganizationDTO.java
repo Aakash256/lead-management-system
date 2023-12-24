@@ -11,6 +11,8 @@ public class OrganizationDTO {
     private String phone_no;
     private Integer rec_version;
 
+    private Long user_id;
+
     public OrganizationDTO() {
     }
 
@@ -79,5 +81,13 @@ public class OrganizationDTO {
 
     public void setRec_version(Integer rec_version) {
         this.rec_version = rec_version;
+    }
+
+    public Long getUserId() {
+        return user_id;
+    }
+
+    public void setUserId(Long user_id) {
+        this.user_id = user_id;
     }
 }

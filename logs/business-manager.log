@@ -856,3 +856,50 @@ Caused by: java.net.BindException: Address already in use
 2023-12-24 12:25:24,045 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringContextShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
 2023-12-24 12:25:24,049 INFO com.zaxxer.hikari.HikariDataSource [SpringContextShutdownHook] HikariPool-1 - Shutdown initiated...
 2023-12-24 12:25:24,068 INFO com.zaxxer.hikari.HikariDataSource [SpringContextShutdownHook] HikariPool-1 - Shutdown completed.
+2023-12-24 13:54:57,015 INFO org.springframework.boot.StartupInfoLogger [main] Starting ServiceApplication on Feyas-MacBook-Air.local with PID 70773 (/Users/netflix/Desktop/lms/backend/lead-management-system/service/target/classes started by netflix in /Users/netflix/Desktop/lms/backend/lead-management-system)
+2023-12-24 13:54:57,028 DEBUG org.springframework.boot.StartupInfoLogger [main] Running with Spring Boot v2.3.3.RELEASE, Spring v5.2.8.RELEASE
+2023-12-24 13:54:57,031 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2023-12-24 13:54:59,604 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-12-24 13:55:00,087 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 439ms. Found 4 JPA repository interfaces.
+2023-12-24 13:55:02,439 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@1e12a5a6' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-12-24 13:55:02,463 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-12-24 13:55:03,172 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 8090 (http)
+2023-12-24 13:55:03,200 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8090"]
+2023-12-24 13:55:03,201 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2023-12-24 13:55:03,201 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.37]
+2023-12-24 13:55:03,369 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2023-12-24 13:55:03,370 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 6083 ms
+2023-12-24 13:55:03,580 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-12-24 13:55:04,008 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-12-24 13:55:04,149 INFO org.hibernate.Version [main] HHH000412: Hibernate ORM core version 5.4.20.Final
+2023-12-24 13:55:04,645 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2023-12-24 13:55:05,124 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2023-12-24 13:55:05,633 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2023-12-24 13:55:05,687 INFO org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2023-12-24 13:55:09,417 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-12-24 13:55:09,447 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-12-24 13:55:11,231 DEBUG org.springframework.web.filter.GenericFilterBean [main] Filter 'tokenAuthenticationFilter' configured for use
+2023-12-24 13:55:12,002 INFO com.business.manager.service.SchedulerInitializer [main] Scheduling all Manager to run at configured time
+2023-12-24 13:55:13,146 INFO springfox.documentation.spring.web.PropertySourcedRequestMappingHandlerMapping [main] Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-12-24 13:55:13,983 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Creating filter chain: Mvc [pattern='/**', OPTIONS], []
+2023-12-24 13:55:13,983 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Creating filter chain: Mvc [pattern='/swagger-ui.html/**'], []
+2023-12-24 13:55:13,984 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Creating filter chain: Mvc [pattern='/configuration/**'], []
+2023-12-24 13:55:13,984 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Creating filter chain: Mvc [pattern='/swagger-resources/**'], []
+2023-12-24 13:55:13,984 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Creating filter chain: Mvc [pattern='/v2/api-docs'], []
+2023-12-24 13:55:13,985 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Creating filter chain: Mvc [pattern='/webjars/**'], []
+2023-12-24 13:55:14,145 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6b83ec49, org.springframework.security.web.context.SecurityContextPersistenceFilter@5bb7fc38, org.springframework.security.web.header.HeaderWriterFilter@6c2063e0, org.springframework.web.filter.CorsFilter@50ad5625, org.springframework.security.web.authentication.logout.LogoutFilter@102dff25, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@665574fb, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@3eb7ff78, com.business.manager.security.security.TokenAuthenticationFilter@689eab53, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@17e31657, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@76a1cc1a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1d921267, org.springframework.security.web.session.SessionManagementFilter@22825762, org.springframework.security.web.access.ExceptionTranslationFilter@44f5259a, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@234dfc8e]
+2023-12-24 13:55:14,382 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2023-12-24 13:55:14,795 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8090"]
+2023-12-24 13:55:14,881 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 8090 (http) with context path ''
+2023-12-24 13:55:14,883 INFO springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper [main] Context refreshed
+2023-12-24 13:55:14,943 INFO springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper [main] Found 1 custom documentation plugin(s)
+2023-12-24 13:55:15,004 INFO springfox.documentation.spring.web.scanners.ApiListingReferenceScanner [main] Scanning for api listing references
+2023-12-24 13:55:15,454 INFO org.springframework.boot.StartupInfoLogger [main] Started ServiceApplication in 21.533 seconds (JVM running for 23.082)
+2023-12-24 13:55:25,430 INFO org.apache.juli.logging.DirectJDKLog [http-nio-8090-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-12-24 13:55:25,432 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8090-exec-1] Initializing Servlet 'dispatcherServlet'
+2023-12-24 13:55:25,462 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8090-exec-1] Completed initialization in 29 ms
+2023-12-24 13:55:26,884 ERROR com.business.manager.security.security.RestAuthenticationEntryPoint [http-nio-8090-exec-8] Responding with unauthorized error. Message - Full authentication is required to access this resource
+2023-12-24 13:58:10,621 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [SpringContextShutdownHook] Shutting down ExecutorService 'applicationTaskExecutor'
+2023-12-24 13:58:10,629 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringContextShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-12-24 13:58:10,637 INFO com.zaxxer.hikari.HikariDataSource [SpringContextShutdownHook] HikariPool-1 - Shutdown initiated...
+2023-12-24 13:58:10,670 INFO com.zaxxer.hikari.HikariDataSource [SpringContextShutdownHook] HikariPool-1 - Shutdown completed.

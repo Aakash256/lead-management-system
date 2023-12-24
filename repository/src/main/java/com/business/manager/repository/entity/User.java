@@ -1,15 +1,8 @@
 package com.business.manager.repository.entity;
 
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
+
 import org.hibernate.annotations.ColumnDefault;
 
 @Entity
@@ -69,6 +62,10 @@ public class User {
   @Column
   private String home_mobile;
 
+  @ManyToOne
+  @JoinColumn(name = "org_id", nullable = true)
+  private Organization organization;
+
   @Column
   private String insert_by;
 
@@ -86,7 +83,8 @@ public class User {
 
   public User(Long id, Integer status, String first_name, String last_name, String job_title, String email,
               String password, String address, String city, String state, String postal_code, String country,
-              String department, String work_phone, String work_mobile, String home_phone, String home_mobile) {
+              String department, String work_phone, String work_mobile, String home_phone, String home_mobile,
+              Organization organization) {
     this.id = id;
     this.status = status;
     this.first_name = first_name;
@@ -104,11 +102,13 @@ public class User {
     this.work_mobile = work_mobile;
     this.home_phone = home_phone;
     this.home_mobile = home_mobile;
+    this.organization = organization;
   }
 
   public User(Integer status, String first_name, String last_name, String job_title, String email,
               String password, String address, String city, String state, String postal_code, String country,
-              String department, String work_phone, String work_mobile, String home_phone, String home_mobile) {
+              String department, String work_phone, String work_mobile, String home_phone, String home_mobile,
+              Organization organization) {
     this.status = status;
     this.first_name = first_name;
     this.last_name = last_name;
@@ -125,6 +125,7 @@ public class User {
     this.work_mobile = work_mobile;
     this.home_phone = home_phone;
     this.home_mobile = home_mobile;
+    this.organization = organization;
   }
 
 //  public User(String email, String password,
@@ -235,4 +236,12 @@ public class User {
   public String getJob_title() { return job_title;}
 
   public void setJob_title(String job_title) { this.job_title = job_title;}
+
+  public Organization getOrganization() {
+    return organization;
+  }
+
+  public void setOrganization(Organization organization) {
+    this.organization = organization;
+  }
 }
