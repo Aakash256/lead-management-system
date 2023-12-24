@@ -65,19 +65,11 @@ public class CustomUserDetailsService implements UserDetailsService {
             user.getStatus(),
             user.getFirst_name(),
             user.getLast_name(),
-            user.getJob_title(),
             user.getEmail(),
             user.getPassword(),
-            user.getAddress(),
-            user.getCity(),
-            user.getState(),
-            user.getPostal_code(),
-            user.getCountry(),
-            user.getDepartment(),
-            user.getWork_phone(),
-            user.getWork_mobile(),
-            user.getHome_phone(),
-            user.getHome_mobile()
+            user.getMobile_no(),
+            user.getMobile_Verified(),
+            user.getEmail_Verified()
     );
   }
 
@@ -88,7 +80,7 @@ public class CustomUserDetailsService implements UserDetailsService {
       user = userOptional.get();
       user.setFirst_name(userDTO.getFirst_name());
       user.setLast_name(userDTO.getLast_name());
-      user.setWork_mobile(userDTO.getWork_mobile());
+      user.setMobile_no(userDTO.getMobile_no());
     }else{
       throw new BadRequestException("User with id - "+userDTO.getId()+" does not exist");
     }
@@ -104,19 +96,11 @@ public class CustomUserDetailsService implements UserDetailsService {
               user.getStatus(),
               user.getFirst_name(),
               user.getLast_name(),
-              user.getJob_title(),
               user.getEmail(),
               user.getPassword(),
-              user.getAddress(),
-              user.getCity(),
-              user.getState(),
-              user.getPostal_code(),
-              user.getCountry(),
-              user.getDepartment(),
-              user.getWork_phone(),
-              user.getWork_mobile(),
-              user.getHome_phone(),
-              user.getHome_mobile());
+              user.getMobile_no(),
+              user.getMobile_Verified(),
+              user.getEmail_Verified());
     }else{
       throw new OAuth2AuthenticationProcessingException("Invalid Token !! Please login again");
     }
