@@ -98,7 +98,8 @@ public class CustomUserDetailsService implements UserDetailsService {
     User user = securityUtil.getAuthenticatedUser();
     UserDTO userDTO = null;
     if(null != user) {
-      userDTO = new UserDTO( user.getId(),
+      userDTO = new UserDTO(
+              user.getId(),
               user.getStatus(),
               user.getFirst_name(),
               user.getLast_name(),
@@ -106,7 +107,13 @@ public class CustomUserDetailsService implements UserDetailsService {
               user.getPassword(),
               user.getMobile_no(),
               user.getMobile_Verified(),
-              user.getEmail_Verified());
+              user.getEmail_Verified(),
+              user.getReportsTo() != null ? user.getReportsTo().getId() : null,
+              user.getOrganization() != null ? user.getOrganization().getId() : null
+      );
+
+      System.out.println("fetch user from token");
+      System.out.println(userDTO);
     }else{
       throw new OAuth2AuthenticationProcessingException("Invalid Token !! Please login again");
     }

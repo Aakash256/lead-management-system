@@ -18,6 +18,8 @@ public class UserDTO {
 
   private Long reportsTo;
 
+  private Long orgId;
+
   public UserDTO() {
   }
 
@@ -36,7 +38,7 @@ public class UserDTO {
 
   public UserDTO(Long id, String status, String first_name, String last_name,
                  String email, String password, String mobile_no, Boolean mobile_verified, Boolean email_verified,
-                 Long reportsTo) {
+                 Long reportsTo, Long orgId) {
     this.id = id;
     this.status = status;
     this.first_name = first_name;
@@ -47,6 +49,7 @@ public class UserDTO {
     this.mobile_verified = mobile_verified;
     this.email_verified = email_verified;
     this.reportsTo = reportsTo;
+    this.orgId = orgId;
   }
 
   public Long getId() {
@@ -112,4 +115,7 @@ public class UserDTO {
 
   public void setReportsTo(Long reportsTo) { this.reportsTo = reportsTo;}
 
+  public Long getOrgId() { return orgId; }
+
+  public void setOrgId(Long orgId) { this.orgId = orgId;}
 }
