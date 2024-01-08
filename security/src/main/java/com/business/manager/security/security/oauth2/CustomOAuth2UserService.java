@@ -30,63 +30,58 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Override
-    public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest) throws OAuth2AuthenticationException {
-        OAuth2User oAuth2User = super.loadUser(oAuth2UserRequest);
-
-        try {
-            return processOAuth2User(oAuth2UserRequest, oAuth2User);
-        } catch (AuthenticationException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            // Throwing an instance of AuthenticationException will trigger the OAuth2AuthenticationFailureHandler
-            throw new InternalAuthenticationServiceException(ex.getMessage(), ex.getCause());
-        }
-    }
-
-    private OAuth2User processOAuth2User(OAuth2UserRequest oAuth2UserRequest, OAuth2User oAuth2User) {
-        OAuth2UserInfo oAuth2UserInfo = OAuth2UserInfoFactory
-            .getOAuth2UserInfo(oAuth2UserRequest.getClientRegistration().getRegistrationId(), oAuth2User.getAttributes());
-        if(StringUtils.isEmpty(oAuth2UserInfo.getEmail())) {
-            throw new OAuth2AuthenticationProcessingException("Email not found from OAuth2 provider");
-        }
-
-        Optional<User> userOptional = userRepository.findByEmail(oAuth2UserInfo.getEmail());
-        User user;
-        if(userOptional.isPresent()) {
-            user = userOptional.get();
-            if(!user.getAuth_provider().equalsIgnoreCase(
-                AuthProviderEnum.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()).toString())) {
-                throw new OAuth2AuthenticationProcessingException("Looks like you're signed up with " +
-                    user.getAuth_provider() + " account. Please use your " + user.getAuth_provider() +
-                        " account to login.");
-            }
-            user = updateExistingUser(user, oAuth2UserInfo);
-        } else {
-            user = registerNewUser(oAuth2UserRequest, oAuth2UserInfo);
-        }
-
-        return UserPrincipal.create(user, oAuth2User.getAttributes());
-    }
+//     @Override
+//    public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest) throws OAuth2AuthenticationException {
+//        OAuth2User oAuth2User = super.loadUser(oAuth2UserRequest);
+//
+//        try {
+//            return processOAuth2User(oAuth2UserRequest, oAuth2User);
+//        } catch (AuthenticationException ex) {
+//            throw ex;
+//        } catch (Exception ex) {
+//            // Throwing an instance of AuthenticationException will trigger the OAuth2AuthenticationFailureHandler
+//            throw new InternalAuthenticationServiceException(ex.getMessage(), ex.getCause());
+//        }
+//    }
+//
+//    private OAuth2User processOAuth2User(OAuth2UserRequest oAuth2UserRequest, OAuth2User oAuth2User) {
+//        OAuth2UserInfo oAuth2UserInfo = OAuth2UserInfoFactory
+//            .getOAuth2UserInfo(oAuth2UserRequest.getClientRegistration().getRegistrationId(), oAuth2User.getAttributes());
+//        if(StringUtils.isEmpty(oAuth2UserInfo.getEmail())) {
+//            throw new OAuth2AuthenticationProcessingException("Email not found from OAuth2 provider");
+//        }
+//
+//        Optional<User> userOptional = userRepository.findByEmail(oAuth2UserInfo.getEmail());
+//        User user;
+//        if(userOptional.isPresent()) {
+//            user = userOptional.get();
+//            if(!user.getAuth_provider().equalsIgnoreCase(
+//                AuthProviderEnum.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()).toString())) {
+//                throw new OAuth2AuthenticationProcessingException("Looks like you're signed up with " +
+//                    user.getAuth_provider() + " account. Please use your " + user.getAuth_provider() +
+//                        " account to login.");
+//            }
+//            user = updateExistingUser(user, oAuth2UserInfo);
+//        } else {
+//            user = registerNewUser(oAuth2UserRequest, oAuth2UserInfo);
+//        }
+//
+//        return UserPrincipal.create(user, oAuth2User.getAttributes());
+// }
 
     @Transactional
     User registerNewUser(OAuth2UserRequest oAuth2UserRequest, OAuth2UserInfo oAuth2UserInfo) {
         User user = new User();
-        user.setRoles(AuthRoleEnum.USER.toString());
-        user.setEnabled(true);
         user.setEmail(oAuth2UserInfo.getEmail());
-        user.setAuth_provider(AuthProviderEnum.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()).toString());
-        user.setEmail_verified(true);
-        user.setImageUrl(oAuth2UserInfo.getImageUrl());
-        user.setName(oAuth2UserInfo.getName());
-        user.setMobile_verified(false);
+        user.setFirstName(oAuth2UserInfo.getFirstName());
+        user.setLastName(oAuth2UserInfo.getLastName());
         User createdUser =userRepository.save(user);
         return createdUser;
     }
 
     private User updateExistingUser(User existingUser, OAuth2UserInfo oAuth2UserInfo) {
-        existingUser.setName(oAuth2UserInfo.getName());
-        existingUser.setImageUrl(oAuth2UserInfo.getImageUrl());
+        existingUser.setFirstName(oAuth2UserInfo.getFirstName());
+        existingUser.setLastName(oAuth2UserInfo.getLastName());
         return userRepository.save(existingUser);
     }
 

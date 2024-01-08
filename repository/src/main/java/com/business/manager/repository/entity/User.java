@@ -1,106 +1,125 @@
 package com.business.manager.repository.entity;
 
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
+
 import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Table(
-    name = "User",
-    uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
+        name = "User",
+        uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
 public class User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @Column
+  private String status;
+
+  @Column
+  private String firstName;
+
+  @Column
+  private String lastName;
+
   @Column(nullable = false)
   private String email;
   @Column
   private String password;
-  @Column
-  private String auth_provider;
-  @Column(nullable = false)
-  private String roles;
-  @Column(nullable = false)
-  @ColumnDefault("true")
-  private Boolean enabled;
-  @Column(nullable = false)
-  private String name;
-  @Column
-  private String mobile_no;
-  @Column
-  private String dob;
-  @Column(nullable = false)
-  @ColumnDefault("false")
-  private Boolean email_verified;
-  @Column(nullable = false)
-  @ColumnDefault("false")
-  private Boolean mobile_verified;
-  @Column
-  private String imageUrl;
 
-  @Column(nullable = false)
-  private Date update_date;
-  @Column(nullable = false)
-  private String update_by;
-  @Column(nullable = false)
-  private Date insert_date;
-  @Column(nullable = false)
-  private String insert_by;
+  @Column
+  private String mobileNo;
+
+  @Column
+  private boolean mobileVerified;
+
+  @Column
+  private boolean emailVerified;
+
+  @ManyToOne
+  @JoinColumn(name = "reports_to", nullable = true)
+  private User reportsTo;
+  @ManyToOne
+  @JoinColumn(name = "org_id", nullable = true)
+  private Organization organization;
+
+  @Column
+  private String insertBy;
+
+  @Column
+  private Date insertDate;
+
+  @Column
+  private String updateBy;
+
+  @Column
+  private Date updateDate;
 
   public User() {
   }
 
-  public User(Long id, String email, String name, String mobile_no, String imageUrl,
-      String dob) {
+  public User(Long id, String status, String firstName, String lastName, String email, String password,
+              String mobileNo, Boolean mobileVerified, Boolean emailVerified, User user, Organization organization) {
     this.id = id;
-    this.email = email;
-    this.name = name;
-    this.mobile_no = mobile_no;
-    this.imageUrl = imageUrl;
-    this.dob = dob;
-  }
-
-  public User(String email, String password,
-      String auth_provider, String roles, Boolean enabled, String name,
-      String mobile_no, String dob, Boolean email_verified, Boolean mobile_verified,
-      String imageUrl) {
+    this.status = status;
+    this.firstName = firstName;
+    this.lastName = lastName;
     this.email = email;
     this.password = password;
-    this.auth_provider = auth_provider;
-    this.roles = roles;
-    this.enabled = enabled;
-    this.name = name;
-    this.mobile_no = mobile_no;
-    this.dob = dob;
-    this.email_verified = email_verified;
-    this.mobile_verified = mobile_verified;
-    this.imageUrl = imageUrl;
+    this.mobileNo = mobileNo;
+    this.mobileVerified = mobileVerified;
+    this.emailVerified = emailVerified;
+    this.reportsTo = user;
+    this.organization = organization;
   }
+
+  public User(String status, String firstName, String lastName, String email, String password,String mobileNo,
+              Boolean mobileVerified, Boolean emailVerified, User user, Organization organization) {
+    this.status = status;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+    this.password = password;
+    this.mobileNo = mobileNo;
+    this.mobileVerified = mobileVerified;
+    this.emailVerified = emailVerified;
+    this.reportsTo = user;
+    this.organization = organization;
+  }
+
+//  public User(String email, String password,
+//      String auth_provider, String roles, Boolean enabled, String name,
+//      String mobile_no, String dob, Boolean email_verified, Boolean mobile_verified,
+//      String imageUrl) {
+//    this.email = email;
+//    this.password = password;
+//    this.auth_provider = auth_provider;
+//    this.roles = roles;
+//    this.enabled = enabled;
+//    this.name = name;
+//    this.mobile_no = mobile_no;
+//    this.dob = dob;
+//    this.email_verified = email_verified;
+//    this.mobile_verified = mobile_verified;
+//    this.imageUrl = imageUrl;
+//  }
 
   @PrePersist
   protected void onCreate() {
-    insert_date = new Date();
+    insertDate = new Date();
     // TO-DO : Replace by current user
-    update_by = "Application";
-    update_date = new Date();
-    insert_by = "Application";
+    updateBy = "Application";
+    updateDate = new Date();
+    insertBy = "Application";
   }
 
   @PreUpdate
   protected void onUpdate() {
-    update_date = new Date();
+    updateDate = new Date();
     // TO-DO : Replace by current user
-    insert_by = "Application";
+    insertBy = "Application";
   }
 
   public Long getId() {
@@ -123,75 +142,43 @@ public class User {
     this.password = password;
   }
 
-  public String getAuth_provider() {
-    return auth_provider;
+  public String getFirstName() { return firstName;}
+
+  public void setFirstName(String firstName) { this.firstName = firstName;}
+
+  public String getLastName() { return lastName;}
+
+  public void setLastName(String lastName) { this.lastName = lastName;}
+
+  public String getStatus() { return status;}
+
+  public void setStatus(String status) { this.status = status;}
+
+  public String getMobileNo() { return  mobileNo;}
+
+  public void setMobileNo(String mobileNo) { this.mobileNo = mobileNo; }
+
+  public Boolean getMobileVerified() { return mobileVerified;}
+
+  public void setMobileVerified(Boolean mobileVerified) { this.mobileVerified = mobileVerified;}
+
+  public Boolean getEmailVerified() { return emailVerified;}
+
+  public void setEmailVerified(Boolean emailVerified) { this.emailVerified = emailVerified;}
+
+  public User getReportsTo() {
+    return reportsTo;
   }
 
-  public void setAuth_provider(String auth_provider) {
-    this.auth_provider = auth_provider;
+  public void setReportsTo(User reportsTo) {
+    this.reportsTo = reportsTo;
   }
 
-  public String getRoles() {
-    return roles;
+  public Organization getOrganization() {
+    return organization;
   }
 
-  public void setRoles(String roles) {
-    this.roles = roles;
-  }
-
-  public Boolean getEnabled() {
-    return enabled;
-  }
-
-  public void setEnabled(Boolean enabled) {
-    this.enabled = enabled;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getMobile_no() {
-    return mobile_no;
-  }
-
-  public void setMobile_no(String mobile_no) {
-    this.mobile_no = mobile_no;
-  }
-
-  public String getDob() {
-    return dob;
-  }
-
-  public void setDob(String dob) {
-    this.dob = dob;
-  }
-
-  public Boolean getEmail_verified() {
-    return email_verified;
-  }
-
-  public void setEmail_verified(Boolean email_verified) {
-    this.email_verified = email_verified;
-  }
-
-  public Boolean getMobile_verified() {
-    return mobile_verified;
-  }
-
-  public void setMobile_verified(Boolean mobile_verified) {
-    this.mobile_verified = mobile_verified;
-  }
-
-  public String getImageUrl() {
-    return imageUrl;
-  }
-
-  public void setImageUrl(String imageUrl) {
-    this.imageUrl = imageUrl;
+  public void setOrganization(Organization organization) {
+    this.organization = organization;
   }
 }

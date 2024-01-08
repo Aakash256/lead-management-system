@@ -28,11 +28,11 @@ public class CustomUserDetailsService implements UserDetailsService {
   @Override
   @Transactional
   public UserDetails loadUserByUsername(String email)
-      throws UsernameNotFoundException {
+          throws UsernameNotFoundException {
     User user = userRepository.findByEmail(email)
-        .orElseThrow(() ->
-            new UsernameNotFoundException("User not found with email : " + email)
-        );
+            .orElseThrow(() ->
+                    new UsernameNotFoundException("User not found with email : " + email)
+            );
 
     return UserPrincipal.create(user);
   }
@@ -46,7 +46,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
   public User findById(Long id) {
     return userRepository.findById(id).orElseThrow(
-        () -> new ResourceNotFoundException("User", "id", id)
+            () -> new ResourceNotFoundException("User", "id", id)
     );
   }
 
@@ -57,8 +57,20 @@ public class CustomUserDetailsService implements UserDetailsService {
   }
 
   private UserDTO createUserDTO(User user) {
-    return new UserDTO(user.getId(), user.getEmail(), user.getName(), user.getMobile_no(),
-        user.getImageUrl(), user.getDob());
+//    return new UserDTO(user.getId(), user.getEmail(), user.getName(), user.getMobile_no(),
+//        user.getImageUrl(), user.getDob());
+
+    return new UserDTO(
+            user.getId(),
+            user.getStatus(),
+            user.getFirstName(),
+            user.getLastName(),
+            user.getEmail(),
+            user.getPassword(),
+            user.getMobileNo(),
+            user.getMobileVerified(),
+            user.getEmailVerified()
+    );
   }
 
   public String updateUser(UserDTO userDTO) {
@@ -66,10 +78,15 @@ public class CustomUserDetailsService implements UserDetailsService {
     User user = null;
     if (userOptional.isPresent()) {
       user = userOptional.get();
-      user.setName(userDTO.getName());
-      user.setMobile_no(userDTO.getMobileNo());
-      user.setImageUrl(userDTO.getImageURL());
-      user.setDob(userDTO.getDob());
+      user.setFirstName(userDTO.getFirstName());
+      user.setLastName(userDTO.getLastName());
+      user.setMobileNo(userDTO.getMobileNo());
+      if(userDTO.getReportsTo() != null) {
+        Optional<User> reportsToUser = userRepository.findById(userDTO.getReportsTo());
+        if (reportsToUser.isPresent()) {
+          user.setReportsTo(reportsToUser.get());
+        }
+      }
     }else{
       throw new BadRequestException("User with id - "+userDTO.getId()+" does not exist");
     }
@@ -81,12 +98,26 @@ public class CustomUserDetailsService implements UserDetailsService {
     User user = securityUtil.getAuthenticatedUser();
     UserDTO userDTO = null;
     if(null != user) {
-      userDTO = new UserDTO(user.getId(), user.getEmail(), user.getName(), user.getMobile_no(), user.getImageUrl(), user.getDob());
+      userDTO = new UserDTO(
+              user.getId(),
+              user.getStatus(),
+              user.getFirstName(),
+              user.getLastName(),
+              user.getEmail(),
+              user.getPassword(),
+              user.getMobileNo(),
+              user.getMobileVerified(),
+              user.getEmailVerified(),
+              user.getReportsTo() != null ? user.getReportsTo().getId() : null,
+              user.getOrganization() != null ? user.getOrganization().getId() : null
+      );
+
+      System.out.println("fetch user from token");
+      System.out.println(userDTO);
     }else{
       throw new OAuth2AuthenticationProcessingException("Invalid Token !! Please login again");
     }
     return userDTO;
   }
 }
-
 
