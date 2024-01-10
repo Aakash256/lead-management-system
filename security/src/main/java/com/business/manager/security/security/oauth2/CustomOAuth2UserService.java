@@ -9,7 +9,6 @@ import com.business.manager.repository.entity.User;
 import com.business.manager.security.exception.OAuth2AuthenticationProcessingException;
 import com.business.manager.security.security.UserPrincipal;
 import com.business.manager.security.security.oauth2.user.OAuth2UserInfo;
-import com.business.manager.security.security.oauth2.user.OAuth2UserInfoFactory;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
