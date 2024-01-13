@@ -1,5 +1,6 @@
 package com.business.manager.security.config;
 
+import com.business.manager.security.security.CustomOrganizationDetailsService;
 import com.business.manager.security.security.CustomUserDetailsService;
 import com.business.manager.security.security.TokenAuthenticationFilter;
 import com.business.manager.security.security.oauth2.CustomOAuth2UserService;
@@ -27,14 +28,17 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
-    securedEnabled = true,
-    jsr250Enabled = true,
-    prePostEnabled = true
+        securedEnabled = true,
+        jsr250Enabled = true,
+        prePostEnabled = true
 )
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired
   private CustomUserDetailsService customUserDetailsService;
+
+  @Autowired
+  private CustomOrganizationDetailsService customOrganizationDetailsService;
 
   @Autowired
   private CustomOAuth2UserService customOAuth2UserService;
@@ -65,11 +69,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   public void configure(AuthenticationManagerBuilder authenticationManagerBuilder)
-      throws Exception {
+          throws Exception {
     authenticationManagerBuilder
-        .userDetailsService(customUserDetailsService)
-        .passwordEncoder(passwordEncoder());
+            .userDetailsService(customUserDetailsService)
+            .passwordEncoder(passwordEncoder())
+            .and().userDetailsService(customOrganizationDetailsService).passwordEncoder(passwordEncoder());
   }
+
+//  @Bean
+//  public CustomOrganizationDetailsService customOrganizationDetailsService() {
+//    return new CustomOrganizationDetailsService();
+//  }
 
   @Bean
   public PasswordEncoder passwordEncoder() {
@@ -84,8 +94,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   }
 
   /*To allow swagger URL
-  * TO-DO - Validate if it can cause some security issue.
-  * */
+   * TO-DO - Validate if it can cause some security issue.
+   * */
   @Override
   public void configure(WebSecurity web) throws Exception {
     web.ignoring().mvcMatchers(HttpMethod.OPTIONS, "/**");
@@ -95,52 +105,52 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http
-        .cors()
-        .and()
-        .sessionManagement()
-        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        .and()
-        .csrf()
-        .disable()
-        .formLogin()
-        .disable()
-        .httpBasic()
-        .disable()
-        .exceptionHandling()
-        .authenticationEntryPoint(new RestAuthenticationEntryPoint())
-        .and()
-        .authorizeRequests()
-        .antMatchers("/**/meta-data/lab-types", "/**/meta-data/lab-pricing", "/**/contact",
-            "/**/public/labs", "/**/trainings/{training-uuid}", "/**/trainings/{training-uuid}/labs","/**/payment/**").permitAll()
-        .antMatchers("/",
-            "/error",
-            "/favicon.ico",
-            "/**/*.png",
-            "/**/*.gif",
-            "/**/*.svg",
-            "/**/*.jpg",
-            "/**/*.html",
-            "/**/*.css",
-            "/**/*.js")
-        .permitAll()
-        .antMatchers("/auth/**", "/oauth2/**")
-        .permitAll()
-        .anyRequest()
-        .authenticated()
-        .and()
-        .oauth2Login()
-        .authorizationEndpoint()
-        .baseUri("/oauth2/authorize")
-        .authorizationRequestRepository(cookieAuthorizationRequestRepository())
-        .and()
-        .redirectionEndpoint()
-        .baseUri("/oauth2/callback/*")
-        .and()
-        .userInfoEndpoint()
-        .userService(customOAuth2UserService)
-        .and()
-        .successHandler(oAuth2AuthenticationSuccessHandler)
-        .failureHandler(oAuth2AuthenticationFailureHandler);
+            .cors()
+            .and()
+            .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+            .csrf()
+            .disable()
+            .formLogin()
+            .disable()
+            .httpBasic()
+            .disable()
+            .exceptionHandling()
+            .authenticationEntryPoint(new RestAuthenticationEntryPoint())
+            .and()
+            .authorizeRequests()
+            .antMatchers("/**/meta-data/lab-types", "/**/meta-data/lab-pricing", "/**/contact",
+                    "/**/public/labs", "/**/trainings/{training-uuid}", "/**/trainings/{training-uuid}/labs","/**/payment/**").permitAll()
+            .antMatchers("/",
+                    "/error", "/organization/**",
+                    "/favicon.ico",
+                    "/**/*.png",
+                    "/**/*.gif",
+                    "/**/*.svg",
+                    "/**/*.jpg",
+                    "/**/*.html",
+                    "/**/*.css",
+                    "/**/*.js")
+            .permitAll()
+            .antMatchers("/auth/**", "/oauth2/**")
+            .permitAll()
+            .anyRequest()
+            .authenticated()
+            .and()
+            .oauth2Login()
+            .authorizationEndpoint()
+            .baseUri("/oauth2/authorize")
+            .authorizationRequestRepository(cookieAuthorizationRequestRepository())
+            .and()
+            .redirectionEndpoint()
+            .baseUri("/oauth2/callback/*")
+            .and()
+            .userInfoEndpoint()
+            .userService(customOAuth2UserService)
+            .and()
+            .successHandler(oAuth2AuthenticationSuccessHandler)
+            .failureHandler(oAuth2AuthenticationFailureHandler);
 
     // Add our custom Token based authentication filter
     http.addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
