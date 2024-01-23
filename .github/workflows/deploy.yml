@@ -1,0 +1,33 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - dockerization
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build and Copy JARs to EC2
+        run: |
+          mvn clean install -DskipTests
+          scp -i /path/to/your/keypair.pem service/target/*.jar ec2-user@your-ec2-instance-ip:/path/on/server/
+
+      - name: SSH into EC2 and restart applications
+        uses: appleboy/ssh-action@v0.4.0
+        with:
+          host: ${{ secrets.EC2_INSTANCE }}
+          username: ec2-user  # or your EC2 instance username
+          key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          port: 22
+          script: |
+            pkill -f "java -jar"
+            java -jar /path/on/server/security.jar > /dev/null 2>&1 &
+            java -jar /path/on/server/common.jar > /dev/null 2>&1 &
+            java -jar /path/on/server/service.jar > /dev/null 2>&1 &
+            java -jar /path/on/server/repository.jar > /dev/null 2>&1 &:
