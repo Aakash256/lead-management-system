@@ -46,7 +46,7 @@ jobs:
           path: artifacts
 
       - name: Copy artifact to EC2
-        run: scp -i lms_ec2_key.pem -r artifacts/ ec2-user@18.216.168.12:/
+        run: scp -i lms_ec2_key.pem -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r artifacts/ ec2-user@18.216.168.12:/
 
       - name: SSH into EC2 and restart applications
         run: |
