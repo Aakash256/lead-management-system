@@ -1,33 +1,54 @@
-name: Deploy to EC2
+name: Java CI/CD with Maven
 
 on:
   push:
-    branches:
-      - dockerization
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build with Maven
+        run: |
+          mvn clean install
+          mkdir artifacts && cp target/*.jar artifacts
+          cd artifacts && ls
+
+      - name: Save artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: github-action-artifact
+          path: artifacts
+
   deploy:
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Build and Copy JARs to EC2
-        run: |
-          mvn clean install -DskipTests
-          scp -i /path/to/your/keypair.pem service/target/*.jar ec2-user@your-ec2-instance-ip:/path/on/server/
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: github-action-artifact
+          path: artifacts
+
+      - name: Copy artifact to EC2
+        run: scp -i lms_ec2_key.pem -r artifacts/ ec2-user@18.216.168.12:/
 
       - name: SSH into EC2 and restart applications
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.EC2_INSTANCE }}
-          username: ec2-user  # or your EC2 instance username
-          key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          port: 22
-          script: |
-            pkill -f "java -jar"
-            java -jar /path/on/server/security.jar > /dev/null 2>&1 &
-            java -jar /path/on/server/common.jar > /dev/null 2>&1 &
-            java -jar /path/on/server/service.jar > /dev/null 2>&1 &
-            java -jar /path/on/server/repository.jar > /dev/null 2>&1 &:
+        run: |
+          ssh -i lms_ec2_key.pem ec2-user@18.216.168.12 "pkill -f 'java -jar' && java -jar /path/on/server/security.jar > /dev/null 2>&1 & java -jar /path/on/server/common.jar > /dev/null 2>&1 & java -jar /path/on/server/service.jar > /dev/null 2>&1 & java -jar /path/on/server/repository.jar > /dev/null 2>&1 &"
