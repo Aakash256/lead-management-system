@@ -19,7 +19,7 @@ jobs:
           scp -i /path/to/your/keypair.pem service/target/*.jar ec2-user@your-ec2-instance-ip:/path/on/server/
 
       - name: SSH into EC2 and restart applications
-        uses: appleboy/ssh-action@v0.4.0
+        uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.EC2_INSTANCE }}
           username: ec2-user  # or your EC2 instance username
