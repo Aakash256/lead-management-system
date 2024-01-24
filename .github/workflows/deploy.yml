@@ -2,9 +2,7 @@ name: Java CI/CD with Maven
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    branches: [ "dockerization" ]
 
 jobs:
   build:
@@ -23,7 +21,8 @@ jobs:
       - name: Build with Maven
         run: |
           mvn clean install
-          mkdir artifacts && cp target/*.jar artifacts
+          mkdir -p artifacts
+          find . -name '*.jar' -type f -exec cp {} artifacts/ \;
           cd artifacts && ls
 
       - name: Save artifact
