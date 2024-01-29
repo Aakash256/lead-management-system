@@ -48,8 +48,10 @@ jobs:
       - name: Set up SSH key
         run: |
           mkdir -p ~/.ssh/
-          echo "$SSH_PRIVATE_KEY" > lms_ec2_key.pem
-          chmod 400 lms_ec2_key.pem
+          echo "-----BEGIN OPENSSH PRIVATE KEY-----" > ~/.ssh/lms_ec2_key.pem
+          echo "$SSH_PRIVATE_KEY" | tr ' ' '\n' | tail -n +5 | head -n -4 >> ~/.ssh/lms_ec2_key.pem
+          echo "-----END OPENSSH PRIVATE KEY-----" >> ~/.ssh/lms_ec2_key.pem
+          chmod 400 ~/.ssh/lms_ec2_key.pem
           touch ~/.ssh/known_hosts
           ssh-keyscan -t rsa 18.216.168.12 >> ~/.ssh/known_hosts
 
